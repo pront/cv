@@ -3,9 +3,10 @@
 \usepackage{tabularx}
 \usepackage{array}
 \usepackage{enumitem}
+
 \usepackage{pifont}
+\usepackage[scaled]{helvet}
 \usepackage[T1]{fontenc}
-\fontfamily{fira}
 \usepackage{utopia}
 \usepackage{multirow}
 \usepackage{enumitem}
@@ -14,7 +15,7 @@
 \usepackage[dvipsnames, table]{xcolor}
 \usepackage{graphicx}
 \usepackage{fullpage}
-\usepackage[top=0.4in, bottom=0.6in, left=0.55in, right=0.55in]{geometry}
+\usepackage[top=0.5in, bottom=1in, left=0.5in, right=0.50in]{geometry}
 
 \usepackage[most]{tcolorbox}
 \addtolength{\textheight}{1.85cm}
@@ -26,14 +27,21 @@
 \hypersetup{colorlinks,breaklinks, urlcolor=linkcolour, linkcolor=linkcolour}
 
 \usepackage{titlesec} %custom section
-\titlespacing{\section}{0pt}{8pt}{0pt}
+\titlespacing{\section}{0pt}{12pt}{0pt}
 % title bg color
-\definecolor{beaublue}{rgb}{0.74, 0.8, 0.9}
+\definecolor{bgfill}{rgb}{0.90, 0.935, 0.95}
+
 \newcommand{\colorsection}[1]{%
-    \colorbox{beaublue}{\parbox{\dimexpr\textwidth-2\fboxsep}{\ #1}}}
+    \colorbox{bgfill}{\parbox{\dimexpr\textwidth-2\fboxsep}{\ #1}}}
 \newcommand{\colorsectionnonumber}[1]{%
-    \colorbox{beaublue}{\parbox{\dimexpr\textwidth-2\fboxsep}{#1}}}
-\titleformat{\section} {\normalfont\Large\bfseries\raggedright}{}{0em}{\colorsection}[\titlerule]
+    \colorbox{bgfill}{\parbox{\dimexpr\textwidth-2\fboxsep}{#1}}}
+\titleformat{\section}
+  {\normalfont\LARGE\bfseries\raggedright} % Format of the title text
+  {}        % Label (e.g., section numbers) — empty means no number
+  {0em}     % Horizontal separation between label and title — 0 since no label
+  {\colorsection}  % Code to execute before the title — likely sets a color
+  %[\titlerule]     % Code to execute after the title — adds a horizontal rule
+
 
 % BIG OH
 \DeclareRobustCommand{\bigO}{%
@@ -43,17 +51,20 @@
 % Job title macro
 \newcolumntype{M}{>{\hsize=.6\hsize}X}
 \newcolumntype{S}{>{\hsize=.3\hsize}X}
-\newcommand*{\mahogany}{\textcolor{Mahogany}}
-\newcommand{\jobtitle}[5]{
-\vspace{0.1cm}
+\definecolor{darkmahogany}{rgb}{0.6, 0.25, 0.0}
+\newcommand*{\mahogany}{\textcolor{darkmahogany}}
+\newcommand{\jobtitle}[4]{
+\vspace{0.3cm}
 \begin{tabularx}
 {\textwidth}
-{ >{\raggedright\arraybackslash}p{6cm} 
-  >{\raggedright\arraybackslash}X 
+{ >{\raggedright\arraybackslash}p{6.5cm}
+  >{\raggedright\arraybackslash}X
   >{\raggedleft\arraybackslash}p{4cm} }
-\large\textbf{#1} & 
-\includegraphics[height=12pt,width=12pt]{#2} \large\textbf{\mahogany{#3}} \normalsize\textbf{(#4)} & 
-\textit{\large\textbf{#5}}
+\fontsize{13pt}{15pt}\selectfont\textbf{#1} &
+
+% \includegraphics[height=12pt,width=12pt]{#2}
+\large\textbf{\mahogany{#2}} \normalsize\textbf{(#3)} &
+\textit{\large\textbf{#4}}
 \end{tabularx}
 \vspace{-0.4cm}
 }
@@ -62,112 +73,141 @@
 \pagestyle{empty} % non-numbered pages
 
 %--------------------TITLE-------------
-\begin{minipage}{.45\linewidth}
-\begin{flushleft}                           
+\begin{minipage}{.40\linewidth}
+\begin{flushleft}
 \Huge \textsc{Pavlos Rontidis}
-\end{flushleft} 
+\end{flushleft}
 \end{minipage}
 \hfill
-\begin{minipage}{.45\linewidth}
-\begin{flushright}   
-\today\\
+\begin{minipage}{.25\linewidth}
+\begin{flushright}
+\href{tel:15555555555}{+1 718 974 0661} \\
 \href{mailto:pavlos.rontidis@pm.me}{pavlos.rontidis@pm.me}\\
-Manhattan, New York
-\end{flushright} 
+\end{flushright}
 \end{minipage}
+\hfill
+\begin{minipage}{.30\linewidth}
+\begin{flushright}
+\href{https://github.com/pront}{Github Profile} \\
+Last update: \today
+\end{flushright}
+\end{minipage}
+
 \noindent\makebox[\linewidth]{\rule{\linewidth}{0.4pt}}
 
 \section{Employment}
+% Datadog
+\jobtitle{Tech Lead, SWE}{Datadog}{New York, NY}{Jun 2023 – Present}
+\begin{itemize}[leftmargin=.27in,label=\ding{226}] \setlength\itemsep{-0.1cm}
+    \item \textbf{Community Open Source Engineering}
+
+    Founding member of Datadog’s Community Open Source Engineering team, where I lead the development of \href{https://github.com/vectordotdev/vector}{Vector}, a widely adopted observability data platform written in \textsc{Rust}. The project was recently \href{https://news.ycombinator.com/item?id=39737122}{featured on Hacker News}. I oversee all facets of the project, including defining the roadmap, driving feature development, reviewing pull requests, maintaining/optimizing CI workflows, and shaping the interview process for growing the team.
+
+    In addition, I contribute to the \href{https://github.com/vectordotdev/vrl}{Vector Remap Language (VRL)}, where I introduced new compiler features like unused expression detection. I am currently leading this project by managing releases and providing guidance for community contributions.
+
+    In early 2024, I was part of the core team that rebooted the Observability Pipelines (OP) product — based on vector.dev — helping redefine its architecture and long-term direction. Following that, I led several high-impact OP projects, including the design and implementation of a live capture system for ingesting real-time events from a distributed worker fleet.
+\end{itemize}
+
 % Dropbox
-\jobtitle{Senior Software Engineer}{icons/dbx.png}{Dropbox}{Remote, NY}{Aug 2021 - Present}
-\begin{itemize}[leftmargin=.27in,label=\ding{213}] \setlength\itemsep{-0.1cm}
-	\item \textbf{Core Sync}:
-    \vspace{-0.1cm}
-    
-    As a member of the Core Sync team I am working on the Dropbox sync engine using \textsc{Rust}. The sync engine is at the core of most Dropbox products. The team is distributed across various states.
+\jobtitle{Senior Software Engineer}{Dropbox}{New York, Remote}{Aug 2021 - Jun 2023}
+\begin{itemize}[leftmargin=.27in,label=\ding{226}] \setlength\itemsep{-0.1cm}
+	\item \textbf{Core Sync} - \textit{Synchronization Engine}
+
+    The synchronization engine is at the heart of most Dropbox products. As a member of the Core Sync team, I led several projects in this area,
+    specifically on replacing our Linux kernel extension using Apple's FileProvider framework.
+    The overarching project was a multi-year, mission-critical effort,
+    and this new Dropbox engine was rolled out to millions of users while I was there.
+    Refer to \href{https://dropbox.tech/infrastructure/rewriting-the-heart-of-our-sync-engine}{this article}
+    for more details on how the engine was rewritten using \textsc{Rust}.
 \end{itemize}
 
 % Google
-\jobtitle{Software Engineer}{icons/google.png}{Google}{Remote, NY}{Jun 2020 - Aug 2021}
-\begin{itemize}[leftmargin=.27in,label=\ding{213}] \setlength\itemsep{-0.1cm}
-	\item \textbf{Unified Traffic Engineering} (Networking Infrastructure): 
-	\vspace{-0.1cm}
-	
-    As a tech lead, I designed and implemented a real-time monitoring system \textsc{(C\texttt{++})}  for validating network database consistency. The system also reported pathing quality metrics, which significantly enhanced visibility into system internals and minimized reaction time to outages by alerting stakeholders. The team was based in Sunnyvale, CA.
+\jobtitle{Software Engineer}{Google}{New York, Remote}{Jun 2020 - Aug 2021}
+\begin{itemize}[leftmargin=.27in,label=\ding{226}] \setlength\itemsep{-0.1cm}
+	\item \textbf{Unified Traffic Engineering} - \textit{Distributed Systems, Middleware, Networking Infrastructure}
+
+The team owned all micro-services responsible for programming of proprietary as well as commercial networking hardware that serves the \textbf{immense} amount of internet traffic passing through the Google data centers.
+
+I spearheaded the design and implementation of a real-time monitoring system aimed at validating consistency between specialized network databases across multiple domains. This necessitated communication and coordination with several teams and stakeholders. Used a plethora of proprietary technologies. After delivering the project, I felt it was time to move on to \textsc{Rust} and other more modern technologies.
 \end{itemize}
 
 %Bloomberg
-\jobtitle{Senior Software Engineer}{icons/bb.png}{Bloomberg LP}{New York, NY}{Jul 2017 - Jul 2020}
-\begin{itemize}[leftmargin=.27in,label=\ding{213}] \setlength\itemsep{-0.1cm}
+\jobtitle{Senior Software Engineer}{Bloomberg LP}{New York, NY}{Nov 2014 - Jul 2020}
+\begin{itemize}[leftmargin=.27in,label=\ding{226}] \setlength\itemsep{-0.1cm}
     %Gateways
-	\item \textbf{Gateway Architecture} (Middleware, Software Infrastructure):
-	\vspace{-0.1cm}
-	
-	Modernization of legacy \textit{Bloomberg gateways} and implementation of low-level network protocols. \textsc{(C\texttt{++})} 
+	\item \textbf{Gateway Architecture} - \textit{Distributed Systems, Middleware, Networking Infrastructure}
+
+I was involved in the modernization of legacy \textit{Bloomberg gateways}
+and the implementation of low-level network protocols in \textsc{C\texttt{++}}.
+This project was a major refactoring challenge,
+as all Bloomberg terminals connected to these gateways, and a migration without disrupting users was a key requirement.
+
 
 	%DMP
-    \vspace{0.2cm} 
-    \item \textbf{Publish/Subscribe middleware} (Middleware, Software Infrastructure):
-    \vspace{-0.1cm} 
-    
-    Lead several projects for this mission critical and cross-platform system. Responsible for all stages of development, from designing new features to deployment and user support.  \textsc{(C\texttt{++})} 
-    
-    Designed and implemented a low-level thread-safe \textit{subscription API}.  \textsc{(C\texttt{++})} 
-    
-    Designed and implemented an app for subscription configuration and routing validation. \textsc{(C++, JavaScript)}
-    
-    Revamped various side-projects related to this framework to support power users.  \textsc{(C\texttt{++})}
-\end{itemize}
+    \vspace{0.2cm}
+    \item \textbf{Publish/Subscribe middleware} - \textit{Distributed Systems}
 
-% Bloomberg London
-\jobtitle{Software Engineer}{icons/bb.png}{Bloomberg LP}{London, UK}{Nov 2014 - Jul 2017}
-\begin{itemize}[leftmargin=.27in,label=\ding{213}] 
-\setlength\itemsep{-0.1cm}
-\item \textbf{Data Processing Framework} (Software Infrastructure):
-\vspace{-0.1cm}
+I worked in the Message Oriented Middleware team, specifically on DMP, which is a proprietary publish/subscribe middleware that runs on multiple platforms. Almost every application on Bloomberg uses this system to this day.
+The open sourced \href{https://bloomberg.github.io/blazingmq/}{blazingmq} is a great insight into what the team was working on and it shares quite a few modules with DMP.
 
-Maintenance, extension and optimization of \textit{DataLayer}. A proprietary mission critical system. \textsc{(C\texttt{++})}
+I led several DMP projects throughout my tenure, taking responsibility for all stages of development, from designing new features to deployment and user support.
+I designed and implemented a low-level thread-safe \textit{subscription API} in \textsc{C\texttt{++}}.
+Additionally, I designed and implemented an application for subscription configuration and routing validation using \textsc{C\texttt{++}} for the backend and JavaScript for the admin application.
+I also revamped various side projects related to this framework to support power users.
 
-Designed and implemented \textit{profiler} and \textit{replay debugger} for the aforementioned framework. \textsc{(C++, JavaScript)}
+    \vspace{0.2cm}
+    \item \textbf{Real-time Data Processing} - \textit{London office 2014-2017}
 
+This position kickstarted my career in Software Engineering.
+My job responsibilities involved maintaining, extending, and optimizing \textit{DataLayer},
+a proprietary in-memory data processing framework that powers Bloomberg's financial applications. \textsc{(C\texttt{++})}
 
-\vspace{0.2cm} 
-\item \textbf{Other notable projects}: 
-\vspace{-0.1cm}
+    Designed and implemented \textit{profiler} and \textit{replay debugger} for the aforementioned framework. \textsc{(C++, JavaScript)}
 
-JavaScript \textit{transpiler} for module inlining and static analysis. \textsc{(JavaScript)}
+    JavaScript \textit{transpiler} for module inlining and static analysis of Datalayer modules. \textsc{(JavaScript)}
 
-Designed \textit{HBase} database for historical financial data and implemented map-reduce Hadoop jobs. \textsc{(Java)} 
+    Designed \textit{HBase} database for historical financial data and implemented map-reduce Hadoop jobs. \textsc{(Java)}
 \end{itemize}
 
 % **** EDUCATION SECTION ****
 \section{Education}
-\jobtitle{MSc in Software Engineering}{icons/icl.png}{Imperial College London}{UK}{Sep 2013 - Sep 2014}
-\begin{itemize}[leftmargin=.27in,label=\ding{213}] \setlength\itemsep{0cm}
-\item \normalsize \textbf{Thesis}: \textit{Parallel Architecture for Large-scale Spiking Neural Network Simulation.} Implemented an Open MPI layer on top of NeMo (spiking neural network simulator) to enable the usage of multiple CPUs/GPUs in an effort to aid the neuroscience community.
+\jobtitle{MSc in Software Engineering}{Imperial College London}{UK}{Sep 2013 - Sep 2014}
+\begin{itemize}[leftmargin=.27in,label=\ding{226}] \setlength\itemsep{0cm}
+\vspace{0.2cm}
+\item\textbf{Greade:} Merit
+\item \normalsize \textbf{Thesis}:
+\textit{Parallel Architecture for Large-scale Spiking Neural Network Simulation}
+\vspace{-0.1cm}
+
+Implemented an Open MPI layer on top of NeMo (spiking neural network simulator) to enable the usage of multiple CPUs/GPUs in an effort to aid the neuroscience community.  The main goal was to support larger networks and heterogeneous devices. The project was awarded the \textit{distinction} grade.
 
 \end{itemize}
 
+\vspace{0.1cm}
+\jobtitle{Engineer's Degree}{Technical University Crete}{Greece}{Sep 2007 - Jul 2013}
 \vspace{0.2cm}
-\jobtitle{Engineer's Degree (Dipl.-Ing)}{icons/tuc.png}{Technical University Crete}{GR}{Sep 2007 - Jul 2013}
-\begin{itemize}[leftmargin=.27in,label=\ding{213}]\setlength\itemsep{-0.1cm}
-\item \textbf{Title:} Engineer's degree in Electronic and Computer Engineering
+
+\begin{itemize}[leftmargin=.27in,label=\ding{226}]\setlength\itemsep{-0.1cm}
+\item \textbf{Title:} \href{https://en.wikipedia.org/wiki/Engineer's_degree#Europe}{Engineer's degree} in Electronic and Computer Engineering
 
 \item\textbf{GPA:} 8.6/10 (Excellent), Top 7\% since 1990
 
-\item \textbf{Thesis:} \textit{Model Driven Development in Wireless Sensor Networks.}  Designed a Domain Specific Language (DSL) and implemented a model compiler which generated NesC code from the DSL code. Contributed to WSN-DPCM, a project that spans across several technical universities and companies, funded by ARTEMIS.
+\item \textbf{Thesis:}
+\textit{Model Driven Development in Wireless Sensor Networks}
+\vspace{-0.1cm}
+
+Designed a Domain Specific Language (DSL) and implemented a model compiler which generated NesC code from the DSL code. Contributed to WSN-DPCM, a project that spans across several technical universities and companies, funded by ARTEMIS.
 
 \item \textbf{Awards:} Multiple scholarships, including the Limmat Stiftung Excellence Awards
 
-\end{itemize}	
+\end{itemize}
 
 % **** OPEN SOURCE CONTRIB SECTION ****
 \section{Open Source Contributions}
-\vspace{0.2cm}
-\begin{itemize}[leftmargin=.27in,label=\ding{213}] 
-\setlength\itemsep{-0.1cm}
-\item Implemented a Gossip protocol algorithm, known as Randomized Rumor Spreading, and integrated it into a very well-known cryptocurrency project \textsc{(C\texttt{++})}. This replaced the pre-existing naive $\bigO(n^2)$ network broadcasting mechanism with a mechanism requiring only $\bigO(n\ln n\ln n)$ transmissions.
-\item Implemented a hardware wallet application to securely store and transact with the crypto-asset.
+\vspace{0.25cm}
+\begin{itemize}[leftmargin=.27in,label=\ding{226}]
+\setlength\itemsep{0.1cm}
+\item Implemented a well known Gossip protocol algorithm, known as Randomized Rumor Spreading, and integrated it into a very well-known open source project written in \textsc{(C\texttt{++})}. This replaced a pre-existing naive $\bigO(n^2)$ network broadcasting mechanism with a more efficient mechanism requiring only $\bigO(n\ln n\ln n)$ transmissions.
 \end{itemize}
 
 \end{document}
